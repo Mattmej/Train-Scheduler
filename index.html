@@ -30,7 +30,7 @@
 
                 <!-- Table Title -->
                 <div class = "row bg-info text-light">
-                    <h3 class = "ml-3 mt-1">Current Train Schedule</h3>
+                    <h5 class = "ml-3 mt-1">Current Train Schedule</h5>
                 </div>
                 
                 <!-- Table -->
@@ -90,22 +90,39 @@
 
                 <!-- Form Title -->
                 <div class = "row bg-info text-light">
-                    <h3 class = "ml-3 mt-1">Add Train</h3>
+                    <h5 class = "ml-3 mt-1">Add Train</h5>
                 </div>
 
                 <form>
 
                     <div class = "space"></div>
-                    
+
                     <div class = "form-group">
                         <label for = "train-name">Train Name</label>
                         <input type = "text" class = "form-control" id = "train-name">
                     </div>
 
+                    <div class = "form-group">
+                        <label for = "destination">Destination</label>
+                        <input type = "text" class = "form-control" id = "destination">
+                    </div>
 
+                    <div class = "form-group">
+                        <label for = "first-train">First Train Time (HH:mm - Military Time)</label>
+                        <input type = "text" class = "form-control" id = "first-train">
+                    </div>
+
+                    <div class = "form-group">
+                        <label for = "frequency">Frequency (min)</label>
+                        <input type = "text" class = "form-control" id = "frequency">
+                    </div>
+
+                    <button type = "submit" class = "btn btn-primary">Submit</button>
 
 
                 </form>
+
+                <div class = "row space"></div>
 
             </div>
 
@@ -113,7 +130,7 @@
 
         </div>
 
-
+        <div class = "row space"></div>
 
 
     </div>
