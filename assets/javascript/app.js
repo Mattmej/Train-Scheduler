@@ -63,8 +63,8 @@ function newTrain(t, d, ft, fr) {
     train.set({
         trainName: t,
         destination: d,
-        firstTrainTime, ft,
-        frequency, fr
+        firstTrainTime: ft,
+        frequency: fr
     });
 }
 
@@ -103,11 +103,25 @@ Steps:
 
 database.ref().on("value", function(snapshot){
 
-    console.log(snapshot);
+    // shows the various database entries that are currently stored
+    console.log(snapshot.val());
+    var trainEntries = snapshot.val();
 
-    var newEntry = $("<tr class = 'new-entry'></tr>");
+    // var newEntry = $("<tr class = 'new-entry'></tr>");
     // $(newEntry).append(snapshot.val().trainName);
     // var trainName = $("<td")
+
+    // turns these database entries into an array consisting of these entries' ids
+    // var keys = Object.keys(snapshot.val());
+    var keys = Object.keys(trainEntries);
+    console.log(keys);
+
+    for (i = 0; i < keys.length; i++) {
+        var id = keys[i];
+        var newTrainName = trainEntries[id].trainName;                  // newTrainName = snapshot.val()
+        console.log(newTrainName);
+
+    }
 })
 
 
