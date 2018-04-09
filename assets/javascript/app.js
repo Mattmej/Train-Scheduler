@@ -51,25 +51,22 @@ var config = {
 
 // }
 
-function newTrain(trainName, destination, firstTrainTime, frequency) {
+function newTrain(t, d, ft, fr) {
+
+    // Whatever will be in this variable will be "pushed" to a new reference,
+    //  instead of replacing an old reference.
     var train = database.ref().push();
+
+    // sets the following parameters.
+    // The parameter names is the name on the left of the colon.
+    // The parameter value is the name on the right of the colon.
     train.set({
-        trainName: trainName,
-        destination: destination,
-        firstTrainTime, firstTrainTime,
-        frequency, frequency
+        trainName: t,
+        destination: d,
+        firstTrainTime, ft,
+        frequency, fr
     });
 }
-
-
-
-
-
-
-
-
-
-
 
 
 // When submit button is clicked, anything entered in the form will be stored and displayed
@@ -86,5 +83,31 @@ $("#submitBtn").on("click", function(e){
 
 })
 
+// Get the data from Firebase and add it to the webpage
+/* 
+Steps:
+
+1. Create a new table row element (<tr></tr>)
+2. Insert <td> elements inside.
+    a. Train Name
+    b. Destination
+    c. Frequency
+    d. Current Time
+    e. Next Arrival
+    f. Minutes Away
+3. Each of the above elements should either retrieve data from the database or retrieve and manipulate the data.
+4. Append the table row element into the table.
+
+
+*/
+
+database.ref().on("value", function(snapshot){
+
+    console.log(snapshot);
+
+    var newEntry = $("<tr class = 'new-entry'></tr>");
+    // $(newEntry).append(snapshot.val().trainName);
+    // var trainName = $("<td")
+})
 
 
