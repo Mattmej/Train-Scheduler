@@ -32,3 +32,59 @@ Game Plan:
 7. Consider entering a "time entered" section in the table to log when the user made the entry.
 
 */
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyB3V4vIJ966AqRB5TwcXgfAOwnxJ9uRA1E",
+    authDomain: "train-scheduler-e8de2.firebaseapp.com",
+    databaseURL: "https://train-scheduler-e8de2.firebaseio.com",
+    projectId: "train-scheduler-e8de2",
+    storageBucket: "train-scheduler-e8de2.appspot.com",
+    messagingSenderId: "358054547547"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+// function submitForm(e) {
+//     e.preventDefault();
+
+// }
+
+function newTrain(trainName, destination, firstTrainTime, frequency) {
+    var train = database.ref().push();
+    train.set({
+        trainName: trainName,
+        destination: destination,
+        firstTrainTime, firstTrainTime,
+        frequency, frequency
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// When submit button is clicked, anything entered in the form will be stored and displayed
+//  in the table
+
+$("#submitBtn").on("click", function(e){
+    e.preventDefault();
+    var trainName = $("#train-name").val().trim();
+    var destination = $("#destination").val().trim();
+    var firstTrainTime = $("#first-train").val().trim();
+    var frequency = $("#frequency").val().trim();
+
+    newTrain(trainName, destination, firstTrainTime, frequency);
+
+})
+
+
+
