@@ -124,6 +124,36 @@ database.ref().on("value", function(snapshot){
     }
 })
 
+////////////////////// Moment.js Testing //////////////////////
+
 // console.log("Current Time: " + moment());
 // console.log("Formatted Current Time: " + moment().format("kk:mm:ss"));
 
+// var testTime = "18:20";
+
+var today = moment().format("YYYY-MM-DD");
+console.log(today);
+
+// var parsedTime = moment(testTime, "kk:mm");
+
+// var formatted = moment(testTime).format("kk:mm");
+// console.log(parsedTime);
+
+// console.log("formatted time -> " + formatted);
+
+//////////////////////////////////////////////////////////////////
+
+
+/* 
+Game Plan for manipulating the time data
+
+1. Retrieve stored time value from Firebase (first train time)
+2. Format the stored time for manipulation with Moment.js
+    a. var varName = moment(TODAY_DATE STORED_TIME)
+3. Calculate next arrival time for train.
+    a. Use a while loop
+    b. Add the "frequency" of train arrival to the first train time until fTT > currentTime
+4. Calculate minutes away
+    a. currentTime - fTT
+
+*/
