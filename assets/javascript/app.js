@@ -119,7 +119,8 @@ database.ref().on("value", function(snapshot){
     console.log(keys);
 
     for (i = 0; i < keys.length; i++) {
-        var id = keys[i];
+        var id = keys[i];                                               // multiple info will be stored in one id.
+
         var newTrainName = trainEntries[id].trainName;                  // newTrainName = snapshot.val()
         console.log("Train Name: " + newTrainName);
 
@@ -139,6 +140,33 @@ database.ref().on("value", function(snapshot){
         console.log("Minutes Away: " + minutesAway);
 
         console.log("----------");
+
+        ///// Will now display the info to the webpage's table /////
+
+        var $newTrain = $("<tr></tr>");
+
+        // var $trainName, $trainDestination, $trainFrequency, $nextArrival, $minutesAway = $("<td></td>");
+        var $trainName = $("<td></td>");
+        var $trainDestination =  $("<td></td>");
+        var $trainFrequency =  $("<td></td>");
+        var $nextArrival =  $("<td></td>");
+        var $minutesAway =  $("<td></td>");
+
+
+        $($trainName).html(newTrainName);
+        $($trainDestination).html(newDestination);
+        $($trainFrequency).html(newFrequency);
+        $($nextArrival).html(nextArrival);
+        $($minutesAway).html(minutesAway);
+
+        // $($newTrain).append($trainName, $trainDestination, $trainFrequency, $nextArrival, $minutesAway);
+        $($newTrain).append($trainName);
+        $($newTrain).append($trainDestination);
+        $($newTrain).append($trainFrequency);
+        $($newTrain).append($nextArrival);
+        $($newTrain).append($minutesAway);
+        $("#table-body").append($newTrain);
+
 
     }
 })
