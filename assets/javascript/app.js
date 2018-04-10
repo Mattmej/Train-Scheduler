@@ -105,6 +105,8 @@ Steps:
 
 database.ref().on("value", function(snapshot){
 
+    $("#table-body").empty();
+
     // shows the various database entries that are currently stored
     console.log(snapshot.val());
     var trainEntries = snapshot.val();
@@ -131,6 +133,7 @@ database.ref().on("value", function(snapshot){
         console.log("Frequency: " + newFrequency);
 
         var newFTT = trainEntries[id].firstTrainTime;                   // will NOT be displayed.
+        console.log("First Train Time: " + newFTT);
 
         var nextArrivalMoment = calculateNextArrival(newFrequency, newFTT);
         var nextArrival = calculateNextArrival(newFrequency, newFTT).format("kk:mm");
