@@ -46,11 +46,6 @@ var config = {
 
   var database = firebase.database();
 
-// function submitForm(e) {
-//     e.preventDefault();
-
-// }
-
 var now = moment();
 
 function newTrain(t, d, ft, fr) {
@@ -83,16 +78,12 @@ $("#submitBtn").on("click", function(e){
 
     newTrain(trainName, destination, firstTrainTime, frequency);
 
-    // $("#train-name").empty();
-    // $("#destination").empty();
-    // $("#first-train").empty();
-    // $("#frequency").empty();
-
     document.getElementById("form").reset();
 
 })
 
 // Get the data from Firebase and add it to the webpage
+
 /* 
 Steps:
 
@@ -118,12 +109,6 @@ database.ref().on("value", function(snapshot){
     console.log(snapshot.val());
     var trainEntries = snapshot.val();
 
-    // var newEntry = $("<tr class = 'new-entry'></tr>");
-    // $(newEntry).append(snapshot.val().trainName);
-    // var trainName = $("<td")
-
-    // turns these database entries into an array consisting of these entries' ids
-    // var keys = Object.keys(snapshot.val());
     var keys = Object.keys(trainEntries);
     console.log(keys);
 
@@ -198,10 +183,6 @@ function calculateNextArrival(freq, ftt) {
     var formattedFTT = moment(diffTime);
     var currentTime = moment();
 
-    // while (formattedFTT < currentTime) {
-    //     formattedFTT = formattedFTT + freq;
-    // }
-
     while (formattedFTT.isBefore()) {
         formattedFTT.add(freq, "minutes");
     }
@@ -211,9 +192,13 @@ function calculateNextArrival(freq, ftt) {
 
 }
 
+
+
 function calculateMinutesAway(timeA, timeB) {
     return timeB.diff(timeA, "minutes");
 }
+
+
 ////////////////////// Moment.js Testing //////////////////////
 
 // console.log("Current Time: " + moment());
