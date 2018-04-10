@@ -83,6 +83,13 @@ $("#submitBtn").on("click", function(e){
 
     newTrain(trainName, destination, firstTrainTime, frequency);
 
+    // $("#train-name").empty();
+    // $("#destination").empty();
+    // $("#first-train").empty();
+    // $("#frequency").empty();
+
+    document.getElementById("form").reset();
+
 })
 
 // Get the data from Firebase and add it to the webpage
