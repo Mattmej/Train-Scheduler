@@ -51,6 +51,8 @@ var config = {
 
 // }
 
+var now = moment();
+
 function newTrain(t, d, ft, fr) {
 
     // Whatever will be in this variable will be "pushed" to a new reference,
@@ -119,11 +121,61 @@ database.ref().on("value", function(snapshot){
     for (i = 0; i < keys.length; i++) {
         var id = keys[i];
         var newTrainName = trainEntries[id].trainName;                  // newTrainName = snapshot.val()
-        console.log(newTrainName);
+        console.log("Train Name: " + newTrainName);
+
+        var newDestination = trainEntries[id].destination;              // will be displayed
+        console.log("Train Destination: " + newDestination);
+
+        var newFrequency = trainEntries[id].frequency;                  // will be displayed
+        console.log("Frequency: " + newFrequency);
+
+        var newFTT = trainEntries[id].firstTrainTime;                   // will NOT be displayed.
+
+        var nextArrivalMoment = calculateNextArrival(newFrequency, newFTT);
+        var nextArrival = calculateNextArrival(newFrequency, newFTT).format("kk:mm");
+        console.log("Train's next arrival: " + nextArrival);
+
+        var minutesAway = calculateMinutesAway(now, nextArrivalMoment);
+        console.log("Minutes Away: " + minutesAway);
+
+        console.log("----------");
 
     }
 })
 
+function calculateNextArrival(freq, ftt) {
+    // ftt: first train time
+    // we need to convert ftt to a moment.js variable
+    // ftt will be in military time HH:mm format
+
+    var today = moment().format("YYYY-MM-DD");
+
+    // for display, not for manipulation. didn't use these.
+    // var formattedFTT = moment(today ftt).format("kk:mm");               // first train time.
+    // var currentTime = moment().format("kk:mm");
+
+    var diffTime = today + " " + ftt;
+
+    // var formattedFTT = moment(today ftt);
+    var formattedFTT = moment(diffTime);
+    var currentTime = moment();
+
+    // while (formattedFTT < currentTime) {
+    //     formattedFTT = formattedFTT + freq;
+    // }
+
+    while (formattedFTT.isBefore()) {
+        formattedFTT.add(freq, "minutes");
+    }
+
+    // return formattedFTT.format("kk:mm");
+    return formattedFTT;
+
+}
+
+function calculateMinutesAway(timeA, timeB) {
+    return timeB.diff(timeA, "minutes");
+}
 ////////////////////// Moment.js Testing //////////////////////
 
 // console.log("Current Time: " + moment());
