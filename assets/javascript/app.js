@@ -124,4 +124,6 @@ database.ref().on("value", function(snapshot){
     }
 })
 
+// console.log("Current Time: " + moment());
+// console.log("Formatted Current Time: " + moment().format("kk:mm:ss"));
 
