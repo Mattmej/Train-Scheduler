@@ -46,8 +46,10 @@ var config = {
 
   var database = firebase.database();
 
+// Current time
 var now = moment();
 
+// Function to create a new train and push it to Firebase database
 function newTrain(t, d, ft, fr) {
 
     // Whatever will be in this variable will be "pushed" to a new reference,
@@ -76,6 +78,7 @@ $("#submitBtn").on("click", function(e){
     var firstTrainTime = $("#first-train").val().trim();
     var frequency = $("#frequency").val().trim();
 
+    // Adds train to Firebase
     newTrain(trainName, destination, firstTrainTime, frequency);
 
     document.getElementById("form").reset();
@@ -101,8 +104,10 @@ Steps:
 
 */
 
+// Run the following when Firebase data changes
 database.ref().on("value", function(snapshot){
 
+    // Empties the table to prevent duplicate entries
     $("#table-body").empty();
 
     // shows the various database entries that are currently stored
@@ -112,6 +117,7 @@ database.ref().on("value", function(snapshot){
     var keys = Object.keys(trainEntries);
     console.log(keys);
 
+    // For each Firebase entry, run the following.
     for (i = 0; i < keys.length; i++) {
         var id = keys[i];                                               // multiple info will be stored in one id.
 
@@ -127,34 +133,39 @@ database.ref().on("value", function(snapshot){
         var newFTT = trainEntries[id].firstTrainTime;                   // will NOT be displayed.
         console.log("First Train Time: " + newFTT);
 
+        // Calculates the next time the train will arrive
         var nextArrivalMoment = calculateNextArrival(newFrequency, newFTT);
         var nextArrival = calculateNextArrival(newFrequency, newFTT).format("kk:mm");
         console.log("Train's next arrival: " + nextArrival);
 
+        // Calculates how long the train will take to arrive
         var minutesAway = calculateMinutesAway(now, nextArrivalMoment);
         console.log("Minutes Away: " + minutesAway);
 
         console.log("----------");
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         ///// Will now display the info to the webpage's table /////
 
         var $newTrain = $("<tr></tr>");
 
-        // var $trainName, $trainDestination, $trainFrequency, $nextArrival, $minutesAway = $("<td></td>");
+        // Creates the table columns.
         var $trainName = $("<td></td>");
         var $trainDestination =  $("<td></td>");
         var $trainFrequency =  $("<td></td>");
         var $nextArrival =  $("<td></td>");
         var $minutesAway =  $("<td></td>");
 
-
+        // Add train's info to columns
         $($trainName).html(newTrainName);
         $($trainDestination).html(newDestination);
         $($trainFrequency).html(newFrequency);
         $($nextArrival).html(nextArrival);
         $($minutesAway).html(minutesAway);
 
-        // $($newTrain).append($trainName, $trainDestination, $trainFrequency, $nextArrival, $minutesAway);
+        // Display columns to page
         $($newTrain).append($trainName);
         $($newTrain).append($trainDestination);
         $($newTrain).append($trainFrequency);
