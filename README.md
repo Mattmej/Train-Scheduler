@@ -8,5 +8,21 @@ When the user enters new train information into the form at the bottom of the pa
 
 Here is a demonstration of a user adding a new train to the Firebase database, with the app displaying the updated database information to the screen (this gif was created at 6:45 pm):
 
+![add_new_train](https://github.com/Mattmej/Train-Scheduler/blob/master/assets/gifs/add_new_train.gif)
 
+<br/>
+<br/>
+
+The new train information, as well as the previous trains' information, is present in the Firebase database.
+
+![train_database](https://github.com/Mattmej/Train-Scheduler/blob/master/assets/gifs/train_database.gif)
+
+<br/>
+<br/>
+
+### Required Items
+
+* Google Account (for Firebase)
+* Moment.js (https://momentjs.com/)
+* jQuery
 
